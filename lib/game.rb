@@ -25,7 +25,7 @@ class Game
   end
 
   def shuffle_turn
-    @players.shuffle!
+    @players.shuffle
   end
 
 end
