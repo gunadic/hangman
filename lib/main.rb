@@ -1,3 +1,5 @@
+require_relative 'game'
+
 def check_num_players (input)
   (1..5).include?(input.to_i)
 end
@@ -26,7 +28,7 @@ setup = Game.new(player_count)
 setup.num_players.times do |i|
   result = false
   while !result
-    puts "What is player #{i}'s name?"
+    puts "What is player #{i+1}'s name?"
     result = setup.add_player(gets.chomp)
     if !result
       puts "Name has already been taken"      
