@@ -1,5 +1,5 @@
 def check_num_players (input)
-  (1..5).member?(input.to_i)
+  (1..5).include?(input.to_i)
 end
 
 def get_secondary_input
@@ -17,8 +17,7 @@ puts "How many players do you want?"
 player_count = gets.chomp
 
 if check_num_players(player_count) == false
-  puts "Please enter a number between 1 and 5."
-  player_count = gets.chomp
+  player_count = get_secondary_input
 end
 
 
