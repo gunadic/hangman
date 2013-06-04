@@ -1,4 +1,5 @@
 require_relative 'game'
+require_relative 'word'
 
 def check_num_players (input)
   (1..5).include?(input.to_i)
