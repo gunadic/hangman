@@ -1,3 +1,5 @@
+require 'pry'
+
 require_relative '../lib/game'
 
 describe Game do
@@ -17,6 +19,33 @@ describe Game do
     temp = Game.new(4)
     temp.add_player("sam")
     expect(temp.add_player("sam")).to eql(false)
+  end
+
+  it "has a method to check if all players have names" do
+    temp = Game.new(4)
+    temp.add_player("bill")
+    temp.add_player("bill2")
+    temp.add_player("bill3")
+    expect(temp.can_procede).to eql(false)
+  end
+
+  it "does not allow you to add more players than specified" do
+    temp = Game.new(4)
+    temp.add_player("bill")
+    temp.add_player("bill2")
+    temp.add_player("bill3")
+    temp.add_player("bill4")
+    expect(temp.add_player("bill5")).to eql(false)
+
+  end
+
+  it "has a method that randomizes turn order" do
+    temp = Game.new(4)
+    temp.add_player("bill")
+    temp.add_player("bill2")
+    temp.add_player("bill3")
+    temp.add_player("bill4")
+    expect(temp).to respond_to(:shuffle_turn)
   end
 
 end

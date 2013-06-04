@@ -23,7 +23,6 @@ if check_num_players(player_count) == false
   player_count = get_secondary_input
 end
 
-
 setup = Game.new(player_count)
 
 setup.num_players.times do |i|
