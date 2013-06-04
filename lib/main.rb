@@ -21,7 +21,7 @@ if check_num_players(player_count) == false
 end
 
 
-setup = GameSetup.new(player_count)
+setup = Game.new(player_count)
 
 setup.num_players.times do |i|
   result = false

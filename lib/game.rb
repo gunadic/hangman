@@ -1,4 +1,4 @@
-class GameSetup
+class Game
 
   attr_accessor :num_players, :players
 
