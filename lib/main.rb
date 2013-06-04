@@ -36,3 +36,6 @@ setup.num_players.times do |i|
   end
 end
 
+puts "Ok! Lets play!"
+puzzle = Word.new
+puts puzzle.display_array.join(" ")
