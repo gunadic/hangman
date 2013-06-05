@@ -4,6 +4,8 @@ require_relative 'game'
 require_relative 'word'
 
 @guessed_letters = []
+@puzzle = Word.new
+
 
 def check_num_players (input)
   (1..5).include?(input.to_i)
@@ -33,6 +35,36 @@ def already_guessed(input)
   end
 end
 
+def print_board
+  puts @puzzle.display_array.join(" ")
+end
+
+def process_guess(guess, name)
+  if guess == "!"
+    print "So, what do you think the word is? "
+    answer_attempt = gets.chomp.downcase
+    if answer_attempt == @puzzle.the_word
+      puts "Congratulations #{name}, you've won!"
+      exit 1
+    else
+      puts "Nope."
+    end
+  else
+    if already_guessed(guess) == true
+      puts "That letter has already been guessed.\n"
+    elsif @puzzle.check_guess(guess) == true
+      puts "Yes, #{guess} is in the puzzle.\n"
+      if @puzzle.check_full == true
+        print_board
+        puts "Congratulations #{name}, you've won!"
+        puts "Took you long enough!"
+        exit 1
+      end
+    else
+      puts "No, #{guess} is not in the puzzle.\n"
+    end
+  end
+end
 
 
 puts "How many players do you want?"
@@ -57,20 +89,15 @@ setup.num_players.times do |i|
 end
 
 puts "Ok! Lets play!"
-puzzle = Word.new
 
-puts puzzle.display_array.join(" ")
-
-setup.shuffle_turn.each do |name| 
-  puts "#{name}, it's your turn!"
-  print "Guess a letter, or enter ! to solve: "
-  guess = gets.chomp
-  if already_guessed(guess) == true
-    puts "You've already guessed that letter."
-  else
-    if puzzle.check_guess(guess) == true
-      puts "Yes, #{guess} is in the puzzle"
-      puts puzzle.display_array.join(" ")
-    end
+while @puzzle.display_array.index("_")!=nil
+  setup.shuffle_turn.each do |name| 
+    print_board
+    puts ""
+    print "#{name}, enter a letter, or enter ! to solve: "
+    process_guess(gets.chomp, name)
+    puts ""
+    puts "---next player---"
+    puts ""
   end
 end
